@@ -1,7 +1,7 @@
 module mojo_top (
     input clk,              // 50MHz clock
     input rst_n,            // reset button (active low)
-    output io_led[0],         // 8 user controllable LEDs
+    output io_led[3][8],         // 8 user controllable LEDs
     input cclk,             // configuration clock, AVR ready when high
     output spi_miso,        // AVR SPI MISO
     input spi_ss,           // AVR SPI Slave Select
@@ -39,7 +39,7 @@ module mojo_top (
     a = 0;
     b = 0;
     c = 0;
-    
+    io_led = 3x{{8h00}}; // turn LEDs off
     counter.d = counter.q + 1;
     
     case(state.q) {
@@ -51,7 +51,7 @@ module mojo_top (
             io_led[0] = 1;
           }
           if (carry == 1) {
-            io_led[1][0:7] = 1;
+            io_led[1] = 1;
           }
         if(counter.q[25] == 1) {
           state.d = state.BON;
@@ -63,10 +63,10 @@ module mojo_top (
         b = 1;
         c = 0;
         if (sum != 1) {
-            io_led[0][0:7] = 1;
+            io_led[0] = 1;
           }
           if (carry == 1) {
-            io_led[1][0:7] = 1;
+            io_led[1] = 1;
           }
         if(counter.q[25] == 1) {
           state.d = state.CON;
@@ -77,10 +77,10 @@ module mojo_top (
         b = 0;
         c = 1;
         if (sum != 1) {
-            io_led[0][0:7] = 1;
+            io_led[0] = 1;
           }
           if (carry == 1) {
-            io_led[1][0:7] = 1;
+            io_led[1] = 1;
           }
         if(counter.q[25] == 1) {
           state.d = state.ABON;
@@ -91,10 +91,10 @@ module mojo_top (
         b = 1;
         c = 0;
         if (sum != 1) {
-            io_led[0][0:7] = 1;
+            io_led[0] = 1;
           }
           if (carry == 1) {
-            io_led[1][0:7] = 1;
+            io_led[1] = 1;
           }
         if(counter.q[25] == 1) {
           state.d = state.BCON;
@@ -105,10 +105,10 @@ module mojo_top (
         b = 1;
         c = 1;
         if (sum != 1) {
-            io_led[0][0:7] = 1;
+            io_led[0] = 1;
           }
           if (carry == 1) {
-            io_led[1][0:7] = 1;
+            io_led[1] = 1;
           }
         if(counter.q[25] == 1) {
           state.d = state.ACON;
@@ -119,10 +119,10 @@ module mojo_top (
         b = 0;
         c = 1;
         if (sum != 1) {
-            io_led[0][0:7] = 1;
+            io_led[0] = 1;
           }
           if (carry == 1) {
-            io_led[1][0:7] = 1;
+            io_led[1] = 1;
           }
         if(counter.q[25] == 1) {
           state.d = state.ABCON;
@@ -133,10 +133,10 @@ module mojo_top (
         b = 1;
         c = 1;
         if (sum != 1) {
-            io_led[0][0:7] = 1;
+            io_led[0] = 1;
           }
           if (carry == 1) {
-            io_led[1][0:7] = 1;
+            io_led[1] = 1;
           }
         if(counter.q[25] == 1) {
           state.d = state.AON;
@@ -145,4 +145,5 @@ module mojo_top (
         }
     }
   }
+}
 }
