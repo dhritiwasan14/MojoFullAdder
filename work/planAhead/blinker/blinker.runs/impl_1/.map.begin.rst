@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="map" Owner="1002045" Host="ISTDLAB17-PC" Pid="1404">
-    </Process>
-</ProcessHandle>
